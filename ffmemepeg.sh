@@ -8,7 +8,6 @@ Options:
     -b, --bot string        Bottom text
     -o, --output path       Output path
     -i, --input path        Input path
-    -s, --size number       Font size
     -M, --top-margin        Top margin
     -m, --bottom-margin     Top margin
     -d, --debug             Show debug info
