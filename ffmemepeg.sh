@@ -27,7 +27,6 @@ fi
 OUTPUT="out"
 TOP_TEXT=""
 BOT_TEXT=""
-FONT_SIZE=24
 TOP_MARGIN=0.05
 BOTTOM_MARGIN=0.05
 
@@ -93,8 +92,8 @@ IMAGE_HEIGHT=$(ffprobe -v error -select_streams v -show_entries stream=height -o
 
 IMAGE_MIN=$((IMAGE_WIDTH > IMAGE_HEIGHT ? IMAGE_HEIGHT : IMAGE_WIDTH))
 
-TOP_TEXT_WIDTH=$(($IMAGE_MIN / (${#TOP_TEXT} + 1) * 3 / 2))
-BOT_TEXT_WIDTH=$(($IMAGE_MIN / (${#BOT_TEXT} + 1) * 3 / 2))
+TOP_TEXT_WIDTH=$((IMAGE_MIN * 3 / 2 / (${#TOP_TEXT} + 1)))
+BOT_TEXT_WIDTH=$((IMAGE_MIN * 3 / 2 / (${#BOT_TEXT} + 1)))
 
 # Check if ffmpeg can read input file
 ffmpeg -i "$INPUT" -f null /dev/null &>/dev/null || echo "ffmpeg cannot read input file \"$INPUT\"" >&2
@@ -102,8 +101,8 @@ ffmpeg -i "$INPUT" -f null /dev/null &>/dev/null || echo "ffmpeg cannot read inp
 # Build top and bottom text arguments
 TEXT_TEMPLATE="drawtext=font=Impact:fontcolor=white:bordercolor=black:x=(w-text_w)/2"
 
-TOP_TEXT_ARGUMENT="$TEXT_TEMPLATE:fontsize=$TOP_TEXT_WIDTH:borderw=$(($TOP_TEXT_WIDTH/20)):text='$TOP_TEXT':y=$TOP_MARGIN*h"
-BOT_TEXT_ARGUMENT="$TEXT_TEMPLATE:fontsize=$BOT_TEXT_WIDTH:borderw=$(($BOT_TEXT_WIDTH/20)):text='$BOT_TEXT':y=h-text_h-$BOTTOM_MARGIN*h"
+TOP_TEXT_ARGUMENT="$TEXT_TEMPLATE:fontsize=$TOP_TEXT_WIDTH:borderw=$((TOP_TEXT_WIDTH/20)):text='$TOP_TEXT':y=$TOP_MARGIN*h"
+BOT_TEXT_ARGUMENT="$TEXT_TEMPLATE:fontsize=$BOT_TEXT_WIDTH:borderw=$((BOT_TEXT_WIDTH/20)):text='$BOT_TEXT':y=h-text_h-$BOTTOM_MARGIN*h"
 
 INPUT_FILENAME=$(basename -- "$INPUT")
 OUTPUT="$OUTPUT.${INPUT_FILENAME##*.}"
