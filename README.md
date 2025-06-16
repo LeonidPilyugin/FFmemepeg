@@ -2,7 +2,7 @@
 A FFmpeg-powered command line tool to create memes.
 
 # Requirements
-FFmemepeg requires FFmpeg.
+FFmemepeg requires FFmpeg and Impact font.
 
 # Usage
 ```sh
