@@ -21,20 +21,20 @@ Options:
 # Examples
 Example assets can be found in `example/` directory.
 
-<img src="example/osaka.png" width=200>
+<img src="example/osaka.png" width=400>
 
 ```sh
 ./ffmemepeg.sh -i example/osaka.png -t "TOP TEXT" -b "BOTTOM TEXT"
 ```
 
-<img src="example/out.png" width=200>
+<img src="example/out.png" width=400>
 
 FFmemepeg can also manipulate GIFes and videos
 
-<img src="example/konata.gif" width=200>
+<img src="example/konata.gif" width=400>
 
 ```sh
 ./ffmemepeg.sh -i example/konata.gif -t "TOP TEXT" -b "BOTTOM TEXT"
 ```
 
-<img src="example/out.gif" width=200>
+<img src="example/out.gif" width=400>
