@@ -1,5 +1,5 @@
 # FFmemepeg
-A FFmpeg-powered command line tool to create memes.
+Shitpost FFmpeg-powered command line tool
 
 # Requirements
 FFmemepeg requires FFmpeg and Impact font.
