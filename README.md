@@ -54,7 +54,7 @@ To add line to top block, use `-t` option.
 
 <img src="example/1.png" width=400>
 
-You can add several lines of text.
+Several lines of text can be added.
 
 ```sh
 ./ffmemepeg -i example/osaka.png -t "TOP TOP TEXT" -t "BOTTOM TOP TEXT"
@@ -77,7 +77,7 @@ Top and bottom blocks have their own font sizes and margins.
 
 <img src="example/4.png" width=400>
 
-You can change font size using `-S` option for top block and `-s` for bottom. The font of whole block will be changed.
+Font size can be changed using `-S` option for top block and `-s` for bottom. The font of whole block will be changed.
 The argument of size option is a reliative increase ratio: passing `-S 1.2` and `-s 0.7` options means increasing top block
 font size by 20% and decreasing bottom block font size by 30%
 ```sh
