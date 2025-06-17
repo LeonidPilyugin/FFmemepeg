@@ -4,12 +4,14 @@ USAGE="$(basename "$0") [OPTION]... -i INPUT
 
 Options:
     -h, --help              Display this help and exit
-    -t, --top string        Top text
-    -b, --bot string        Bottom text
-    -o, --output path       Output path
-    -i, --input path        Input path
+    -t, --top               Top text
+    -b, --bot               Bottom text
+    -o, --output            Output path
+    -i, --input             Input path
     -M, --top-margin        Top margin
     -m, --bottom-margin     Top margin
+    -S, --top-scale         Top text fontsize scale
+    -s, --bottom-scale      Top text fontsize scale
     -d, --debug             Show debug info
 "
 
@@ -29,12 +31,14 @@ TOP_TEXT=""
 BOT_TEXT=""
 TOP_MARGIN=0.05
 BOTTOM_MARGIN=0.05
+TOP_SCALE=1.0
+BOT_SCALE=1.0
 
-VALID_ARGS=$(getopt -o t:b:o:i:s:M:m:hd --long top:,bottom:,output:,input:,size:,top-margin:,bottom-margin:,help,debug, -- "$@")
+VALID_ARGS=$(getopt -o t:b:o:i:M:m:S:s:hd --long top:,bottom:,output:,input:,top-margin:,bottom-margin:,top-scale:,bottom-scale:,help,debug, -- "$@")
 
 eval set -- "$VALID_ARGS"
 
-while [ : ]; do
+while :;do
     case $1 in
         -t | --top)
             TOP_TEXT="$2"
@@ -58,6 +62,14 @@ while [ : ]; do
             ;;
         -m | --bottom-margin)
             TOP_MARGIN="$2"
+            shift 2
+            ;;
+        -S | --top-scale)
+            TOP_SCALE="$2"
+            shift 2
+            ;;
+        -s | --bottom-scale)
+            BOT_SCALE="$2"
             shift 2
             ;;
         -h | --help)
@@ -92,8 +104,11 @@ IMAGE_HEIGHT=$(ffprobe -v error -select_streams v -show_entries stream=height -o
 
 IMAGE_MIN=$((IMAGE_WIDTH > IMAGE_HEIGHT ? IMAGE_HEIGHT : IMAGE_WIDTH))
 
-TOP_TEXT_WIDTH=$((IMAGE_MIN * 3 / 2 / (${#TOP_TEXT} + 1)))
-BOT_TEXT_WIDTH=$((IMAGE_MIN * 3 / 2 / (${#BOT_TEXT} + 1)))
+TOP_TEXT_SIZE=$((IMAGE_MIN * 3 / 2 / (${#TOP_TEXT} + 1)))
+TOP_TEXT_SIZE=$(printf %.0f "$(echo "$TOP_TEXT_SIZE * $TOP_SCALE" | bc)")
+
+BOT_TEXT_SIZE=$((IMAGE_MIN * 3 / 2 / (${#BOT_TEXT} + 1)))
+BOT_TEXT_SIZE=$(printf %.0f "$(echo "$BOT_TEXT_SIZE * $BOT_SCALE" | bc)")
 
 # Check if ffmpeg can read input file
 ffmpeg -i "$INPUT" -f null /dev/null &>/dev/null || echo "ffmpeg cannot read input file \"$INPUT\"" >&2
@@ -101,8 +116,8 @@ ffmpeg -i "$INPUT" -f null /dev/null &>/dev/null || echo "ffmpeg cannot read inp
 # Build top and bottom text arguments
 TEXT_TEMPLATE="drawtext=font=Impact:fontcolor=white:bordercolor=black:x=(w-text_w)/2"
 
-TOP_TEXT_ARGUMENT="$TEXT_TEMPLATE:fontsize=$TOP_TEXT_WIDTH:borderw=$((TOP_TEXT_WIDTH/20)):text='$TOP_TEXT':y=$TOP_MARGIN*h"
-BOT_TEXT_ARGUMENT="$TEXT_TEMPLATE:fontsize=$BOT_TEXT_WIDTH:borderw=$((BOT_TEXT_WIDTH/20)):text='$BOT_TEXT':y=h-text_h-$BOTTOM_MARGIN*h"
+TOP_TEXT_ARGUMENT="$TEXT_TEMPLATE:fontsize=$TOP_TEXT_SIZE:borderw=$((TOP_TEXT_SIZE/20)):text='$TOP_TEXT':y=$TOP_MARGIN*h"
+BOT_TEXT_ARGUMENT="$TEXT_TEMPLATE:fontsize=$BOT_TEXT_SIZE:borderw=$((BOT_TEXT_SIZE/20)):text='$BOT_TEXT':y=h-text_h-$BOTTOM_MARGIN*h"
 
 INPUT_FILENAME=$(basename -- "$INPUT")
 OUTPUT="$OUTPUT.${INPUT_FILENAME##*.}"
@@ -114,9 +129,9 @@ FFMPEG_COMMAND="$FFMPEG_COMMAND \"$OUTPUT\""
 if [ -n "$DEBUG" ]; then
     echo "ffmpeg command:"
     echo "$FFMPEG_COMMAND"
-    eval ${FFMPEG_COMMAND}
+    eval "${FFMPEG_COMMAND}"
 else
-    eval ${FFMPEG_COMMAND} &>/dev/null
+    eval "${FFMPEG_COMMAND}" &>/dev/null
 fi
 
 

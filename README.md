@@ -11,13 +11,15 @@ ffmemepeg.sh [OPTION]... -i INPUT
 
 Options:
     -h, --help              Display this help and exit
-    -t, --top string        Top text
-    -b, --bot string        Bottom text
-    -o, --output path       Output path
-    -i, --input path        Input path
+    -t, --top               Top text
+    -b, --bot               Bottom text
+    -o, --output            Output path
+    -i, --input             Input path
     -M, --top-margin        Top margin
     -m, --bottom-margin     Top margin
-    -d, --debug             Show debug information
+    -S, --top-scale         Top text fontsize scale
+    -s, --bottom-scale      Top text fontsize scale
+    -d, --debug             Show debug info
 ```
 
 # Examples
