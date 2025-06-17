@@ -9,9 +9,9 @@ Options:
     -o, --output            Output path
     -i, --input             Input path
     -M, --top-margin        Top margin
-    -m, --bottom-margin     Top margin
+    -m, --bottom-margin     Bottom margin
     -S, --top-scale         Top text fontsize scale
-    -s, --bottom-scale      Top text fontsize scale
+    -s, --bottom-scale      Bottom text fontsize scale
     -d, --debug             Show debug info
 "
 
