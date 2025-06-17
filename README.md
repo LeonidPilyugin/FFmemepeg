@@ -2,7 +2,7 @@
 Shitpost FFmpeg-powered command line tool
 
 # Requirements
-FFmemepeg requires FFmpeg and Impact font.
+FFmemepeg requires FFmpeg, bc and Impact font.
 
 # Examples
 Example assets can be found in `example/` directory.
