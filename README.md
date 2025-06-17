@@ -93,3 +93,6 @@ reliative to image height. The default margins are 0.05 for both top and bottom 
 ```
 
 <img src="example/6.png" width=400>
+
+The output file can be provided with `-o` option. The default output filename is `out` with
+input file extention.
