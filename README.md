@@ -29,8 +29,8 @@ FFmemepeg can also manipulate GIFes and videos.
 
 Print help message using `-h` option.
 ```sh
-$ ./ffmemepegg -h
-ffmemepegg [OPTION]... -i INPUT
+$ ./ffmemepeg -h
+ffmemepeg [OPTION]... -i INPUT
 
 Options:
     -t, --top               Top text
@@ -49,7 +49,7 @@ The text, putting on image is splitted on two blocks: top text and bottom text.
 To add line to top block, use `-t` option.
 
 ```sh
-./ffmemepegg -i example/osaka.png -t "TOP TEXT"
+./ffmemepeg -i example/osaka.png -t "TOP TEXT"
 ```
 
 <img src="example/1.png" width=400>
@@ -57,7 +57,7 @@ To add line to top block, use `-t` option.
 You can add several lines of text.
 
 ```sh
-./ffmemepegg -i example/osaka.png -t "TOP TOP TEXT" -t "BOTTOM TOP TEXT"
+./ffmemepeg -i example/osaka.png -t "TOP TOP TEXT" -t "BOTTOM TOP TEXT"
 ```
 
 <img src="example/2.png" width=400>
@@ -65,14 +65,14 @@ You can add several lines of text.
 For bottom text, use `-b` option.
 
 ```sh
-./ffmemepegg -i example/osaka.png -t "TOP TEXT" -b "BOTTOM TEXT"
+./ffmemepeg -i example/osaka.png -t "TOP TEXT" -b "BOTTOM TEXT"
 ```
 
 <img src="example/3.png" width=400>
 
 Top and bottom blocks have their own font sizes and margins.
 ```sh
-./ffmemepegg -i example/osaka.png -t "TOP TOP TEXT" -t "BOTTOM TOP TEXT" -b "TOP BOTTOM TEXT" -b "BOTTOM BOTTOM TEXT"
+./ffmemepeg -i example/osaka.png -t "TOP TOP TEXT" -t "BOTTOM TOP TEXT" -b "TOP BOTTOM TEXT" -b "BOTTOM BOTTOM TEXT"
 ```
 
 <img src="example/4.png" width=400>
@@ -81,7 +81,7 @@ You can change font size using `-S` option for top block and `-s` for bottom. Th
 The argument of size option is a reliative increase ratio: passing `-S 1.2` and `-s 0.7` options means increasing top block
 font size by 20% and decreasing bottom block font size by 30%
 ```sh
-./ffmemepegg -i example/osaka.png -t "TOP TOP TEXT" -t "BOTTOM TOP TEXT" -b "TOP BOTTOM TEXT" -b "BOTTOM BOTTOM TEXT" -S 1.2 -s 0.7
+./ffmemepeg -i example/osaka.png -t "TOP TOP TEXT" -t "BOTTOM TOP TEXT" -b "TOP BOTTOM TEXT" -b "BOTTOM BOTTOM TEXT" -S 1.2 -s 0.7
 ```
 
 <img src="example/5.png" width=400>
@@ -89,7 +89,7 @@ font size by 20% and decreasing bottom block font size by 30%
 Blocks also have margins. They can be changed using `-M` and `-m` options. Their size is measured
 reliative to image height. The default margins are 0.05 for both top and bottom blocks.
 ```sh
-./ffmemepegg -i example/osaka.png -t "TOP TOP TEXT" -t "BOTTOM TOP TEXT" -b "TOP BOTTOM TEXT" -b "BOTTOM BOTTOM TEXT" -M 0 -m 0.2
+./ffmemepeg -i example/osaka.png -t "TOP TOP TEXT" -t "BOTTOM TOP TEXT" -b "TOP BOTTOM TEXT" -b "BOTTOM BOTTOM TEXT" -M 0 -m 0.2
 ```
 
 <img src="example/6.png" width=400>
